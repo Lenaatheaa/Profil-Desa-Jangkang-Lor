@@ -1,0 +1,23 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Padukuhan Jangkang Lor"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [110.242, -7.822],
+            [110.256, -7.824],
+            [110.258, -7.837],
+            [110.243, -7.836],
+            [110.242, -7.822]
+          ]
+        ]
+      }
+    }
+  ]
+}

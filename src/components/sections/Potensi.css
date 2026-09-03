@@ -1,0 +1,113 @@
+.potensi-section {
+  padding: var(--space-12) 0;
+  background-color: var(--color-secondary-light);
+}
+
+.potensi-tabs {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-bottom: var(--space-6);
+}
+
+@media (min-width: 640px) {
+  .potensi-tabs {
+    flex-direction: row;
+    justify-content: center;
+    gap: var(--space-4);
+  }
+}
+
+.potensi-tab-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-6);
+  background-color: var(--color-bg-card);
+  border: 2px solid transparent;
+  border-radius: var(--radius-full);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.2s ease;
+}
+
+.potensi-tab-btn:hover {
+  background-color: var(--color-bg-main);
+  color: var(--color-primary);
+}
+
+.potensi-tab-btn.active {
+  background-color: var(--color-primary);
+  color: var(--color-text-light);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.potensi-content-wrapper {
+  background-color: var(--color-bg-card);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-md);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .potensi-content-wrapper {
+    padding: var(--space-8);
+  }
+}
+
+.potensi-content-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-bottom: var(--space-4);
+}
+
+.potensi-content-icon {
+  width: 4rem;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-full);
+  color: var(--color-text-light);
+}
+
+.bg-pertanian {
+  background-color: var(--color-primary);
+}
+.bg-kesenian {
+  background-color: var(--color-accent);
+  color: var(--color-primary-dark);
+}
+.bg-umkm {
+  background-color: var(--color-secondary-dark);
+}
+
+.potensi-content-title {
+  font-size: 1.75rem;
+  color: var(--color-text-main);
+}
+
+.potensi-content-desc {
+  font-size: 1.125rem;
+  line-height: 1.7;
+  color: var(--color-text-muted);
+}
+
+.potensi-sub-items {
+  list-style-type: disc;
+  padding-left: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.potensi-sub-items li {
+  line-height: 1.5;
+}

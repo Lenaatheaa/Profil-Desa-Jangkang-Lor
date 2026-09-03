@@ -1,0 +1,111 @@
+.tentang-section {
+  padding: var(--space-12) 0;
+  background-color: var(--color-bg-main);
+}
+
+.identitas-grid {
+  display: grid;
+  gap: var(--space-4);
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  margin-bottom: var(--space-8);
+}
+
+@media (min-width: 640px) {
+  .identitas-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .identitas-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.identitas-card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  background-color: var(--color-bg-card);
+}
+
+.identitas-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  background-color: var(--color-primary-light);
+  color: var(--color-text-light);
+  border-radius: var(--radius-md);
+  flex-shrink: 0;
+}
+
+.identitas-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.identitas-label {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+}
+
+.identitas-value {
+  font-size: 1.125rem;
+  color: var(--color-text-main);
+}
+
+.sejarah-container {
+  background-color: var(--color-secondary-light);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  margin-top: var(--space-8);
+}
+
+.sejarah-title {
+  text-align: center;
+  margin-bottom: var(--space-6);
+  font-size: 2rem;
+  color: var(--color-secondary-dark);
+}
+
+.sejarah-grid {
+  display: grid;
+  gap: var(--space-6);
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+@media (min-width: 768px) {
+  .sejarah-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.sejarah-card {
+  border: 1px solid rgba(169, 132, 103, 0.2);
+}
+
+.cerita-judul {
+  font-size: 1.5rem;
+  margin-bottom: var(--space-3);
+  color: var(--color-secondary-dark);
+}
+
+.cerita-isi {
+  color: var(--color-text-main);
+  line-height: 1.7;
+  margin-bottom: var(--space-4);
+}
+
+.cerita-disclaimer {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: 0.85rem;
+  color: var(--color-accent);
+  background-color: var(--color-bg-main);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+}

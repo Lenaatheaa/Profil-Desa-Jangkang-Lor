@@ -1,0 +1,124 @@
+.kontak-section {
+  padding: var(--space-12) 0;
+  background-color: var(--color-secondary-light);
+}
+
+.kontak-layout {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+@media (min-width: 768px) {
+  .kontak-layout {
+    flex-direction: row;
+  }
+  
+  .kontak-info,
+  .kontak-form-wrapper {
+    flex: 1;
+  }
+}
+
+.kontak-info {
+  background-color: var(--color-bg-main);
+  padding: var(--space-6);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+}
+
+.kontak-info-title,
+.kontak-form-title {
+  font-size: 1.5rem;
+  color: var(--color-primary-dark);
+  margin-bottom: var(--space-6);
+  border-bottom: 2px solid var(--color-accent);
+  padding-bottom: var(--space-2);
+  display: inline-block;
+}
+
+.info-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+  margin-bottom: var(--space-4);
+}
+
+.info-icon {
+  width: 3rem;
+  height: 3rem;
+  background-color: var(--color-primary-light);
+  color: var(--color-text-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  flex-shrink: 0;
+}
+
+.info-item strong {
+  display: block;
+  font-size: 1rem;
+  color: var(--color-text-main);
+  margin-bottom: 2px;
+}
+
+.info-item p,
+.info-item a {
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+}
+
+.info-item a:hover {
+  color: var(--color-primary);
+  text-decoration: underline;
+}
+
+.kontak-form-wrapper {
+  background-color: var(--color-bg-card);
+  padding: var(--space-6);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--color-border);
+}
+
+.kontak-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.form-group label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-text-main);
+}
+
+.form-group input,
+.form-group textarea {
+  padding: var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-family: inherit;
+  font-size: 1rem;
+  transition: border-color 0.2s ease;
+  background-color: var(--color-bg-main);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  background-color: var(--color-bg-card);
+}
+
+.btn-full {
+  width: 100%;
+}

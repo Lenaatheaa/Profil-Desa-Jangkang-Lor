@@ -1,0 +1,120 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: var(--space-4) 0;
+  transition: all 0.3s ease;
+  background-color: transparent;
+  color: var(--color-text-light);
+}
+
+.navbar-scrolled {
+  background-color: rgba(27, 67, 50, 0.95);
+  backdrop-filter: blur(8px);
+  padding: var(--space-3) 0;
+  box-shadow: var(--shadow-md);
+}
+
+.navbar-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar-logo {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: inherit;
+}
+
+.navbar-logo:hover {
+  color: var(--color-accent);
+}
+
+.navbar-desktop {
+  display: none;
+}
+
+.nav-list {
+  display: flex;
+  list-style: none;
+  gap: var(--space-4);
+}
+
+.nav-link {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: inherit;
+  opacity: 0.9;
+  transition: all 0.2s ease;
+}
+
+.nav-link:hover {
+  opacity: 1;
+  color: var(--color-accent);
+}
+
+.navbar-toggle {
+  display: block;
+  color: inherit;
+}
+
+/* Mobile Menu */
+.navbar-mobile {
+  position: fixed;
+  top: 60px; /* Below navbar */
+  left: 0;
+  width: 100%;
+  background-color: var(--color-primary-dark);
+  padding: var(--space-4);
+  transform: translateY(-150%);
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
+  box-shadow: var(--shadow-md);
+  z-index: 999;
+}
+
+.navbar-mobile.open {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.nav-list-mobile {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  gap: var(--space-2);
+}
+
+.nav-link-mobile {
+  display: block;
+  padding: var(--space-3);
+  color: var(--color-text-light);
+  font-weight: 500;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  transition: all 0.2s ease;
+}
+
+.nav-link-mobile:hover {
+  background-color: rgba(255,255,255,0.05);
+  color: var(--color-accent);
+  padding-left: var(--space-4);
+}
+
+@media (min-width: 1024px) {
+  .navbar-desktop {
+    display: block;
+  }
+  
+  .navbar-toggle {
+    display: none;
+  }
+  
+  .navbar-mobile {
+    display: none;
+  }
+}
