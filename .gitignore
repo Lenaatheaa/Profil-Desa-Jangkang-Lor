@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+create-user.cjs
+run-sql.cjs
+update-hero.cjs
+scratch-supabase.js

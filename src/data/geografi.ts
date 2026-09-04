@@ -1,16 +1,16 @@
 export interface Geografi {
   luasHektare: number | null;
-  batas: { arah: 'utara' | 'selatan' | 'timur' | 'barat'; wilayah: string }[];
+  batasWilayah: { utara: string; selatan: string; timur: string; barat: string; };
   koordinatPusat: { lat: number; lng: number } | null;
 }
 
 export const geografiData: Geografi = {
-  luasHektare: null,
-  batas: [
-    { arah: 'barat', wilayah: 'Bantarjo' },
-    { arah: 'selatan', wilayah: 'Jangkang Kidul, Sentolo Lor' },
-    { arah: 'utara', wilayah: 'Banaran Kidul' },
-    { arah: 'timur', wilayah: 'Sentolo Lor, Sungai' }
-  ],
-  koordinatPusat: { lat: -7.83, lng: 110.25 }, // Placeholder Sentolo
+  luasHektare: 110,
+  batasWilayah: {
+    utara: 'Banaran Kidul',
+    selatan: 'Jangkang Kidul, Sentolo Lor',
+    timur: 'Sentolo Lor, Sungai',
+    barat: 'Bantarjo'
+  },
+  koordinatPusat: { lat: -7.83, lng: 110.25 },
 };

@@ -23,8 +23,8 @@ export const Fasilitas: React.FC = () => {
     <section id="fasilitas" className="fasilitas-section">
       <div className="container">
         <SectionHeading 
-          title="Fasilitas Publik" 
-          subtitle="Sarana dan prasarana yang tersedia untuk menunjang kehidupan sosial masyarakat." 
+          title="Fasilitas Padukuhan" 
+          subtitle="Berbagai fasilitas yang tersedia di Jangkang Lor mendukung aktivitas dan kebutuhan masyarakat sehari-hari." 
         />
 
         <div className="fasilitas-grid">
@@ -34,13 +34,19 @@ export const Fasilitas: React.FC = () => {
                 {getIcon(fasilitas.ikon)}
               </div>
               
-              <h3 className="fasilitas-kategori">{fasilitas.kategori}</h3>
+              <h3 className="fasilitas-kategori">{fasilitas.nama}</h3>
               
-              <div className="fasilitas-badges">
-                {fasilitas.namaFasilitas.map((nama, idx) => (
-                  <Badge key={idx} variant="primary">{nama}</Badge>
-                ))}
-              </div>
+              {fasilitas.deskripsi && (
+                <p className="mt-2 text-muted" style={{fontSize: '0.9rem', marginBottom: '1rem'}}>{fasilitas.deskripsi}</p>
+              )}
+
+              {fasilitas.items && fasilitas.items.length > 0 && (
+                <div className="fasilitas-badges mt-4">
+                  {fasilitas.items.map((item, idx) => (
+                    <Badge key={idx} variant="primary">{item}</Badge>
+                  ))}
+                </div>
+              )}
             </Card>
           ))}
         </div>

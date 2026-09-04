@@ -176,3 +176,14 @@
 .text-primary-dark {
   color: var(--color-primary-dark);
 }
+
+.stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: var(--space-4); margin-bottom: var(--space-6); }
+.gender-chart { margin-bottom: var(--space-6); }
+.gender-stat { display: flex; justify-content: space-between; font-size: 0.875rem; margin-bottom: var(--space-2); }
+.gender-bar { height: 12px; display: flex; border-radius: var(--radius-full); overflow: hidden; margin-bottom: var(--space-2); }
+.gender-bar-fill.male { background-color: var(--color-primary); }
+.gender-bar-fill.female { background-color: var(--color-secondary); }
+.info-box { background-color: var(--color-bg-main); padding: var(--space-4); border-radius: var(--radius-md); border-left: 4px solid var(--color-accent); }
+.info-box-label { font-size: 0.875rem; color: var(--color-text-muted); margin-bottom: var(--space-1); }
+.info-box-value { font-weight: 500; }
+

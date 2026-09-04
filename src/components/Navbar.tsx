@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
-import { identitasData } from '../../data/identitas';
+import { identitasData } from '../data/identitas';
 import './Navbar.css';
 
 export const Navbar: React.FC = () => {
@@ -26,15 +26,9 @@ export const Navbar: React.FC = () => {
   const closeMenu = () => setIsOpen(false);
 
   const navLinks = [
-    { name: 'Beranda', href: '#beranda' },
-    { name: 'Tentang', href: '#tentang' },
     { name: 'Data', href: '#data' },
-    { name: 'Potensi', href: '#potensi' },
     { name: 'Fasilitas', href: '#fasilitas' },
-    { name: 'Kegiatan', href: '#kegiatan' },
     { name: 'Galeri', href: '#galeri' },
-    { name: 'Lokasi', href: '#lokasi' },
-    { name: 'Kontak', href: '#kontak' },
   ];
 
   return (
@@ -52,6 +46,11 @@ export const Navbar: React.FC = () => {
                 <a href={link.href} className="nav-link">{link.name}</a>
               </li>
             ))}
+            <li>
+              <a href="/admin/login" className="nav-link nav-link-admin">
+                Admin
+              </a>
+            </li>
           </ul>
         </nav>
 
@@ -71,6 +70,11 @@ export const Navbar: React.FC = () => {
               </a>
             </li>
           ))}
+          <li>
+            <a href="/admin/login" className="nav-link-mobile nav-link-admin-mobile" onClick={closeMenu}>
+              Login Admin
+            </a>
+          </li>
         </ul>
       </div>
     </header>

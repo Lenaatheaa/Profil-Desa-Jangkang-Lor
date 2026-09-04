@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from '../Button';
 import './Kegiatan.css';
-import { Users, BookOpen, Lightbulb, HeartHandshake } from 'lucide-react';
+import { BookOpen, Lightbulb, HeartHandshake } from 'lucide-react';
 
 export const Kegiatan: React.FC = () => {
   return (
@@ -9,36 +9,25 @@ export const Kegiatan: React.FC = () => {
       <div className="container">
         <div className="kegiatan-content">
           <div className="kegiatan-text">
-            <h2 className="kegiatan-title">Bersama Jangkang Lor</h2>
-            <p className="kegiatan-subtitle">KKN UAD 159</p>
-            <p className="kegiatan-tagline">"Hadir. Berproses. Memberi Manfaat."</p>
+            <h2 className="kegiatan-title">KKN DI JANGKANG LOR</h2>
+            <p className="kegiatan-subtitle" style={{marginBottom: '0.5rem', fontSize: '1.5rem', fontWeight: 600}}>Bersama Jangkang Lor</p>
             
             <p className="kegiatan-desc">
-              Mahasiswa Kuliah Kerja Nyata (KKN) Universitas Ahmad Dahlan angkatan 159 
-              hadir di Padukuhan Jangkang Lor untuk belajar bersama masyarakat, 
-              berproses dalam program-program pengabdian, dan berupaya memberikan manfaat 
-              yang berkelanjutan bagi perkembangan potensi desa.
+              Padukuhan Jangkang Lor menjadi bagian dari perjalanan pengabdian mahasiswa KKN UAD 159.
             </p>
-            
-            <div className="kegiatan-features">
-              <div className="feature-item">
-                <BookOpen className="feature-icon" />
-                <span>Edukasi</span>
-              </div>
-              <div className="feature-item">
-                <Lightbulb className="feature-icon" />
-                <span>Pemberdayaan</span>
-              </div>
-              <div className="feature-item">
-                <HeartHandshake className="feature-icon" />
-                <span>Sosial</span>
-              </div>
-            </div>
+            <p className="kegiatan-desc">
+              Melalui berbagai program kerja, mahasiswa bersama masyarakat berkolaborasi dalam berbagai kegiatan yang mencakup bidang pendidikan, kesehatan, ekonomi, sosial, hukum, bahasa, kesenian, dan pemberdayaan masyarakat.
+            </p>
+            <p className="kegiatan-desc">
+              Kegiatan KKN tidak hanya menjadi ruang bagi mahasiswa untuk mengabdi, tetapi juga menjadi kesempatan untuk belajar, berkolaborasi, dan tumbuh bersama masyarakat.
+            </p>
+
+            <p className="kegiatan-tagline mt-4 mb-6">"Hadir. Berproses. Memberi Manfaat."</p>
 
             <Button 
               variant="secondary" 
               size="lg"
-              className="mt-6"
+              className="mt-2"
               onClick={() => {
                 document.getElementById('galeri')?.scrollIntoView({ behavior: 'smooth' });
               }}

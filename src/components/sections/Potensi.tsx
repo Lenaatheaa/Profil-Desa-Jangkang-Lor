@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { potensiData } from '../../data/potensi';
+import React, { useState, useEffect } from 'react';
+import { supabase } from '../../lib/supabase';
+import { potensiData as staticPotensiData } from '../../data/potensi';
 import { SectionHeading } from '../SectionHeading';
 import { Card } from '../Card';
 import { AccordionItem } from '../AccordionItem';
@@ -17,7 +18,27 @@ const getIcon = (id: string) => {
 };
 
 export const Potensi: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<string>(potensiData[0].id);
+  const [potensiList, setPotensiList] = useState<any[]>(staticPotensiData);
+  const [activeTab, setActiveTab] = useState<string>(staticPotensiData[0].id);
+
+  useEffect(() => {
+    const fetchPotensi = async () => {
+      const { data, error } = await supabase.from('potensi_desa').select('*').order('created_at', { ascending: true });
+      if (!error && data && data.length > 0) {
+        // Map data from DB to match component structure
+        const mappedData = data.map(item => ({
+          id: item.kategori,
+          judul: item.judul,
+          deskripsi: item.deskripsi,
+          penutup: item.penutup,
+          subKategori: item.sub_kategori
+        }));
+        setPotensiList(mappedData);
+        setActiveTab(mappedData[0].id);
+      }
+    };
+    fetchPotensi();
+  }, []);
 
   return (
     <section id="potensi" className="potensi-section">
@@ -28,7 +49,7 @@ export const Potensi: React.FC = () => {
         />
 
         <div className="potensi-tabs">
-          {potensiData.map((item) => (
+          {potensiList.map((item) => (
             <button
               key={item.id}
               className={`potensi-tab-btn ${activeTab === item.id ? 'active' : ''}`}
@@ -41,7 +62,7 @@ export const Potensi: React.FC = () => {
         </div>
 
         <div className="potensi-content-wrapper">
-          {potensiData.map((item) => (
+          {potensiList.map((item) => (
             activeTab === item.id && (
               <div key={item.id} className="potensi-content animate-fade-in">
                 <div className="potensi-content-header">
@@ -55,15 +76,20 @@ export const Potensi: React.FC = () => {
 
                 {item.subKategori && item.subKategori.length > 0 && (
                   <div className="potensi-accordion-list mt-6">
-                    {item.subKategori.map((sub, idx) => (
+                    {item.subKategori.map((sub: any, idx: number) => (
                       <AccordionItem key={idx} title={sub.nama}>
                         <ul className="potensi-sub-items">
-                          {sub.items.map((subItem, sIdx) => (
+                          {sub.items.map((subItem: string, sIdx: number) => (
                             <li key={sIdx}>{subItem}</li>
                           ))}
                         </ul>
                       </AccordionItem>
                     ))}
+                    {item.penutup && (
+                      <p className="potensi-content-desc mt-4" style={{ fontStyle: 'italic', marginTop: '1rem' }}>
+                        {item.penutup}
+                      </p>
+                    )}
                   </div>
                 )}
               </div>

@@ -24,34 +24,40 @@
   justify-content: center;
   gap: var(--space-2);
   padding: var(--space-3) var(--space-6);
-  background-color: var(--color-bg-card);
-  border: 2px solid transparent;
+  background-color: rgba(255,255,255,0.7);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.4);
   border-radius: var(--radius-full);
-  font-size: 1rem;
+  font-size: 1.05rem;
   font-weight: 600;
   color: var(--color-text-muted);
-  box-shadow: var(--shadow-sm);
-  transition: all 0.2s ease;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .potensi-tab-btn:hover {
-  background-color: var(--color-bg-main);
+  background-color: #ffffff;
   color: var(--color-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
 }
 
 .potensi-tab-btn.active {
-  background-color: var(--color-primary);
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
   color: var(--color-text-light);
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 8px 25px rgba(45, 106, 79, 0.3);
   transform: translateY(-2px);
+  border-color: transparent;
 }
 
 .potensi-content-wrapper {
-  background-color: var(--color-bg-card);
-  border-radius: var(--radius-lg);
+  background-color: rgba(255,255,255,0.95);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.6);
+  border-radius: 1.5rem;
   padding: var(--space-6);
-  box-shadow: var(--shadow-md);
-  max-width: 800px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.06);
+  max-width: 850px;
   margin: 0 auto;
 }
 
@@ -64,29 +70,42 @@
 .potensi-content-header {
   display: flex;
   align-items: center;
-  gap: var(--space-4);
-  margin-bottom: var(--space-4);
+  gap: var(--space-5);
+  margin-bottom: var(--space-5);
+  border-bottom: 2px solid rgba(0,0,0,0.03);
+  padding-bottom: var(--space-4);
 }
 
 .potensi-content-icon {
-  width: 4rem;
-  height: 4rem;
+  width: 4.5rem;
+  height: 4.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: var(--radius-full);
+  border-radius: 1.2rem;
   color: var(--color-text-light);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  transform: rotate(-3deg);
+  transition: transform 0.3s ease;
+}
+
+.potensi-content-wrapper:hover .potensi-content-icon {
+  transform: rotate(0deg) scale(1.05);
 }
 
 .bg-pertanian {
-  background-color: var(--color-primary);
+  background: linear-gradient(135deg, #2d6a4f, #52b788);
+  box-shadow: 0 10px 25px rgba(45, 106, 79, 0.3);
 }
 .bg-kesenian {
-  background-color: var(--color-accent);
-  color: var(--color-primary-dark);
+  background: linear-gradient(135deg, #e76f51, #f4a261);
+  color: #fff;
+  box-shadow: 0 10px 25px rgba(231, 111, 81, 0.3);
 }
 .bg-umkm {
-  background-color: var(--color-secondary-dark);
+  background: linear-gradient(135deg, #9c6644, #b08968);
+  color: #fff;
+  box-shadow: 0 10px 25px rgba(156, 102, 68, 0.3);
 }
 
 .potensi-content-title {
@@ -101,13 +120,35 @@
 }
 
 .potensi-sub-items {
-  list-style-type: disc;
-  padding-left: var(--space-6);
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
+  list-style-type: none;
+  padding-left: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--space-3);
 }
 
 .potensi-sub-items li {
   line-height: 1.5;
+  background-color: rgba(0,0,0,0.02);
+  padding: 0.8rem 1rem;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(0,0,0,0.03);
+  position: relative;
+  padding-left: 2.2rem;
+  transition: all 0.2s ease;
+}
+
+.potensi-sub-items li::before {
+  content: '→';
+  position: absolute;
+  left: 0.8rem;
+  color: var(--color-primary);
+  opacity: 0.7;
+  font-weight: bold;
+}
+
+.potensi-sub-items li:hover {
+  background-color: rgba(45, 106, 79, 0.04);
+  border-color: rgba(45, 106, 79, 0.1);
+  transform: translateX(4px);
 }

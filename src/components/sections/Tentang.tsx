@@ -1,6 +1,5 @@
 import React from 'react';
 import { identitasData } from '../../data/identitas';
-import { sejarahData } from '../../data/sejarah';
 import { SectionHeading } from '../SectionHeading';
 import { Card } from '../Card';
 import './Tentang.css';
@@ -14,6 +13,10 @@ export const Tentang: React.FC = () => {
           title="Tentang Jangkang Lor" 
           subtitle="Identitas wilayah dan nilai historis peninggalan leluhur yang terus dijaga." 
         />
+        
+        <p className="text-center text-muted" style={{maxWidth: '800px', margin: '0 auto 3rem auto', lineHeight: 1.8}}>
+          Padukuhan Jangkang Lor merupakan salah satu padukuhan yang berada di Kelurahan Sentolo, Kapanewon Sentolo, Kabupaten Kulon Progo, Daerah Istimewa Yogyakarta. Jangkang Lor merupakan salah satu dari 12 padukuhan di Kalurahan Sentolo. Jangkang Lor berdampingan dengan Jangkang Kidul, dan dalam struktur pemerintahan Kalurahan Sentolo keduanya tetap tercatat sebagai dua padukuhan yang berbeda.
+        </p>
         
         <div className="identitas-grid">
           <Card className="identitas-card">
@@ -65,21 +68,27 @@ export const Tentang: React.FC = () => {
           </Card>
         </div>
 
-        <div className="sejarah-container mt-6">
-          <h3 className="sejarah-title">Mengenal Sejarah</h3>
-          <div className="sejarah-grid">
-            {sejarahData.map((cerita) => (
-              <Card key={cerita.id} className="sejarah-card">
-                <h4 className="cerita-judul">{cerita.judul}</h4>
-                <p className="cerita-isi">{cerita.isi}</p>
-                {cerita.isCeritaRakyat && (
-                  <div className="cerita-disclaimer">
-                    <Info size={16} />
-                    <span>Cerita masyarakat, sumber belum pasti.</span>
-                  </div>
-                )}
-              </Card>
-            ))}
+        <div className="sejarah-content animate-slide-up" style={{ animationDelay: '0.2s', marginTop: '3rem' }}>
+          <h3 className="section-subtitle text-center" style={{fontSize: '2rem', marginBottom: '1.5rem', fontWeight: 700}}>SEJARAH</h3>
+          <h4 className="text-center" style={{marginBottom: '2rem', color: 'var(--color-text-muted)'}}>Mengenal Sejarah Jangkang Lor</h4>
+          
+          <div className="sejarah-text" style={{ lineHeight: 1.8 }}>
+            <p>{identitasData.sejarah.pembuka}</p>
+            
+            <div className="sejarah-card mt-4 mb-4" style={{ backgroundColor: 'var(--color-bg-main)', padding: '1.5rem', borderRadius: 'var(--radius-lg)', borderLeft: '4px solid var(--color-primary)' }}>
+              <h4 style={{ color: 'var(--color-primary)', marginBottom: '0.5rem' }}>{identitasData.sejarah.cerita1.judul}</h4>
+              <p>{identitasData.sejarah.cerita1.teks}</p>
+            </div>
+
+            <div className="sejarah-card mt-4 mb-4" style={{ backgroundColor: 'var(--color-bg-main)', padding: '1.5rem', borderRadius: 'var(--radius-lg)', borderLeft: '4px solid var(--color-secondary)' }}>
+              <h4 style={{ color: 'var(--color-secondary)', marginBottom: '0.5rem' }}>{identitasData.sejarah.cerita2.judul}</h4>
+              <p>{identitasData.sejarah.cerita2.teks}</p>
+              <small style={{ display: 'block', marginTop: '1rem', fontStyle: 'italic', color: 'var(--color-text-muted)' }}>
+                {identitasData.sejarah.cerita2.disclaimer}
+              </small>
+            </div>
+
+            <p>{identitasData.sejarah.penutup}</p>
           </div>
         </div>
       </div>

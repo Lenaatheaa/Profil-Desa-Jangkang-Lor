@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, GeoJSON } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
-import { lokasiData, Lokasi } from '../../data/lokasi';
-import { geografiData } from '../../data/geografi';
+import { geografiData } from '../data/geografi';
+import type { LokasiSupabase } from '../lib/supabase';
 import './Map.css';
 
 // Fix Leaflet's default icon paths
@@ -14,7 +14,7 @@ L.Icon.Default.mergeOptions({
   shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
 });
 
-// Custom Icons for categories (using standard marker but different colors or just simple standard icons for now)
+// Custom Icons for categories
 const createIcon = (color: string) => {
   return new L.Icon({
     iconUrl: `https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-${color}.png`,
@@ -26,29 +26,30 @@ const createIcon = (color: string) => {
   });
 };
 
-const icons = {
-  pemerintahan: createIcon('red'),
-  ibadah: createIcon('green'),
-  kesehatan: createIcon('blue'),
-  olahraga: createIcon('orange'),
-  'sejarah-budaya': createIcon('violet'),
-  lainnya: createIcon('grey')
+const getIconForCategory = (kategori: string) => {
+  const cat = kategori.toLowerCase();
+  if (cat.includes('pemerintah')) return createIcon('red');
+  if (cat.includes('ibadah')) return createIcon('green');
+  if (cat.includes('kesehatan')) return createIcon('blue');
+  if (cat.includes('olahraga')) return createIcon('orange');
+  if (cat.includes('sejarah') || cat.includes('budaya')) return createIcon('violet');
+  return createIcon('grey');
 };
 
 interface MapProps {
   activeCategories: string[];
+  lokasiData: LokasiSupabase[];
 }
 
-export const MapComponent: React.FC<MapProps> = ({ activeCategories }) => {
+export const MapComponent: React.FC<MapProps> = ({ activeCategories, lokasiData }) => {
   const [geoJsonData, setGeoJsonData] = useState<any>(null);
   
   const center = geografiData.koordinatPusat || { lat: -7.83, lng: 110.25 };
   
   // Filter markers based on active categories
-  const filteredLokasi = lokasiData.filter(loc => activeCategories.includes(loc.kategori));
+  const filteredLokasi = lokasiData.filter((loc) => activeCategories.includes(loc.kategori.toLowerCase()));
 
   useEffect(() => {
-    // In future (v2), load boundaries.geojson here
     fetch('/boundaries.geojson')
       .then(res => res.json())
       .then(data => setGeoJsonData(data))
@@ -79,14 +80,16 @@ export const MapComponent: React.FC<MapProps> = ({ activeCategories }) => {
           <Marker 
             key={lokasi.id} 
             position={[lokasi.lat, lokasi.lng]}
-            icon={icons[lokasi.kategori]}
+            icon={getIconForCategory(lokasi.kategori)}
           >
             <Popup>
               <div className="map-popup">
+                {lokasi.foto_url && (
+                  <img src={lokasi.foto_url} alt={lokasi.nama} style={{width: '100%', height: '100px', objectFit: 'cover', borderRadius: '4px', marginBottom: '4px'}} />
+                )}
                 <strong>{lokasi.nama}</strong>
                 <span className="popup-category">{lokasi.kategori}</span>
                 {lokasi.deskripsi && <p className="popup-desc">{lokasi.deskripsi}</p>}
-                <small className="popup-placeholder-note">* Koordinat perkiraan</small>
               </div>
             </Popup>
           </Marker>

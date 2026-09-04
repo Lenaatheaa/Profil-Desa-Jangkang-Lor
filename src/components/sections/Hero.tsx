@@ -1,50 +1,52 @@
-import React from 'react';
-import { identitasData } from '../../data/identitas';
+import React, { useEffect, useState } from 'react';
 import { Button } from '../Button';
+import { ArrowRight, Map } from 'lucide-react';
+import { supabase } from '../../lib/supabase';
 import './Hero.css';
 
 export const Hero: React.FC = () => {
+  const [data, setData] = useState<any>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data: res } = await supabase.from('profil_umum').select('*').eq('id', 1).single();
+      if (res) setData(res);
+    };
+    fetchData();
+  }, []);
+
+  const bgStyle = data?.hero_image_url 
+    ? { backgroundImage: `url('${data.hero_image_url}')` } 
+    : {};
+
   return (
-    <section id="beranda" className="hero-section">
+    <section id="beranda" className="hero-section" style={bgStyle}>
       <div className="hero-overlay"></div>
       
-      <div className="container hero-container">
-        <div className="hero-badge animate-fade-in">
-          <span className="hero-badge-icon">📍</span>
-          <span>{identitasData.kalurahan}, {identitasData.kabupaten}, {identitasData.provinsi}</span>
+      <div className="container hero-container animate-fade-in">
+        <div className="hero-badge">
+          <span>Kabupaten Kulon Progo</span>
         </div>
         
-        <h1 className="hero-title animate-fade-in" style={{ animationDelay: '0.1s' }}>
-          Selamat Datang di <br />
-          <span className="hero-title-highlight">Padukuhan {identitasData.namaPadukuhan}</span>
+        <h1 className="hero-title">
+          {data?.hero_title || 'Selamat Datang di Padukuhan Jangkang Lor'}
         </h1>
         
-        <p className="hero-subtitle animate-fade-in" style={{ animationDelay: '0.2s' }}>
-          Mengenal lebih dekat Jangkang Lor, potensi, masyarakat, dan kehidupan di dalamnya. 
-          Wilayah yang asri dengan pesona bukit Gunung Ampo di Kalurahan Sentolo.
+        <p className="hero-subtitle">
+          {data?.hero_subtitle || 'Menyimpan pesona alam pedesaan yang asri, kekayaan budaya yang kental, dan masyarakat yang guyub rukun membangun wilayah.'}
         </p>
         
-        <div className="hero-cta-group animate-fade-in" style={{ animationDelay: '0.3s' }}>
-          <Button 
-            size="lg" 
-            variant="primary" 
-            onClick={() => {
-              document.getElementById('tentang')?.scrollIntoView({ behavior: 'smooth' });
-            }}
-          >
-            Jelajahi Profil
-          </Button>
-          
-          <Button 
-            size="lg" 
-            variant="outline" 
-            className="btn-outline-hero"
-            onClick={() => {
-              document.getElementById('potensi')?.scrollIntoView({ behavior: 'smooth' });
-            }}
-          >
-            Lihat Potensi
-          </Button>
+        <div className="hero-cta-group">
+          <a href="#tentang">
+            <Button variant="primary" size="lg">
+              Jelajahi Profil <ArrowRight size={20} className="ml-2" />
+            </Button>
+          </a>
+          <a href="#potensi">
+            <Button variant="outline" size="lg" className="btn-outline-hero">
+              <Map size={20} className="mr-2" /> Lihat Potensi
+            </Button>
+          </a>
         </div>
       </div>
     </section>
