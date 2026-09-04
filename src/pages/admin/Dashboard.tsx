@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase, type LokasiSupabase } from '../../lib/supabase';
 import { Button } from '../../components/Button';
-import { LogOut, Plus, Edit2, Trash2, MapPin, X, Save, Image as ImageIcon } from 'lucide-react';
+import { LogOut, Plus, Edit2, Trash2, MapPin, X, Save, Image as ImageIcon, Menu } from 'lucide-react';
 import { MapContainer, TileLayer, Marker, useMapEvents, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import { ImageUploadPicker } from '../../components/admin/ImageUploadPicker';
@@ -62,7 +62,7 @@ const MapPicker: React.FC<{ lat: number; lng: number; onChange: (lat: number, ln
 export const Dashboard: React.FC = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<'profil' | 'peta' | 'galeri' | 'pemerintahan' | 'potensi'>('profil');
-
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   useEffect(() => {
     const checkUser = async () => {
       const { data: { session } } = await supabase.auth.getSession();
@@ -81,18 +81,28 @@ export const Dashboard: React.FC = () => {
   return (
     <div className="admin-dashboard-layout">
       <header className="admin-header">
-        <h1>Dashboard Admin Jangkang Lor</h1>
+        <div className="admin-header-title">
+          <button className="admin-sidebar-toggle" onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
+            <Menu size={24} color="white" />
+          </button>
+          <h1 style={{ color: 'white' }}>Dashboard Admin Jangkang Lor</h1>
+        </div>
         <Button variant="outline" size="sm" onClick={handleLogout} className="btn-outline-hero" style={{color:'white'}}>
           <LogOut size={16} className="mr-2" /> Logout
         </Button>
       </header>
 
       <div className="admin-content-wrapper">
-        <aside className="admin-sidebar">
+        <aside className={`admin-sidebar ${isSidebarOpen ? 'open' : ''}`}>
+          <div className="admin-sidebar-mobile-header" style={{ display: 'flex', justifyContent: 'flex-end', paddingBottom: '10px' }}>
+             <button onClick={() => setIsSidebarOpen(false)} className="admin-sidebar-close" style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
+                <X size={24} color="#333" />
+             </button>
+          </div>
           <ul className="admin-sidebar-nav">
             <li>
               <button 
-                onClick={() => setActiveTab('profil')}
+                onClick={() => { setActiveTab('profil'); setIsSidebarOpen(false); }}
                 className={`admin-sidebar-btn ${activeTab === 'profil' ? 'active' : ''}`}
               >
                 Profil Umum
@@ -100,7 +110,7 @@ export const Dashboard: React.FC = () => {
             </li>
             <li>
               <button 
-                onClick={() => setActiveTab('galeri')}
+                onClick={() => { setActiveTab('galeri'); setIsSidebarOpen(false); }}
                 className={`admin-sidebar-btn ${activeTab === 'galeri' ? 'active' : ''}`}
               >
                 Galeri Foto
@@ -108,7 +118,7 @@ export const Dashboard: React.FC = () => {
             </li>
             <li>
               <button 
-                onClick={() => setActiveTab('peta')}
+                onClick={() => { setActiveTab('peta'); setIsSidebarOpen(false); }}
                 className={`admin-sidebar-btn ${activeTab === 'peta' ? 'active' : ''}`}
               >
                 Titik Peta (Lokasi)
@@ -116,7 +126,7 @@ export const Dashboard: React.FC = () => {
             </li>
             <li>
               <button 
-                onClick={() => setActiveTab('pemerintahan')}
+                onClick={() => { setActiveTab('pemerintahan'); setIsSidebarOpen(false); }}
                 className={`admin-sidebar-btn ${activeTab === 'pemerintahan' ? 'active' : ''}`}
               >
                 Struktur Pemerintahan
@@ -124,7 +134,7 @@ export const Dashboard: React.FC = () => {
             </li>
             <li>
               <button 
-                onClick={() => setActiveTab('potensi')}
+                onClick={() => { setActiveTab('potensi'); setIsSidebarOpen(false); }}
                 className={`admin-sidebar-btn ${activeTab === 'potensi' ? 'active' : ''}`}
               >
                 Potensi Desa
