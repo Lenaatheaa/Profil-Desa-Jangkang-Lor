@@ -87,13 +87,13 @@ export const Dashboard: React.FC = () => {
         </Button>
       </header>
 
-      <div style={{ display: 'flex', flex: 1 }}>
-        <aside className="admin-sidebar" style={{ width: '250px', backgroundColor: '#fff', borderRight: '1px solid #ddd', padding: '20px' }}>
-          <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '10px' }}>
+      <div className="admin-content-wrapper">
+        <aside className="admin-sidebar">
+          <ul className="admin-sidebar-nav">
             <li>
               <button 
                 onClick={() => setActiveTab('profil')}
-                style={{ width: '100%', textAlign: 'left', padding: '10px', backgroundColor: activeTab === 'profil' ? '#e9ecef' : 'transparent', border: 'none', borderRadius: '4px', cursor: 'pointer', fontWeight: activeTab === 'profil' ? 'bold' : 'normal' }}
+                className={`admin-sidebar-btn ${activeTab === 'profil' ? 'active' : ''}`}
               >
                 Profil Umum
               </button>
@@ -101,7 +101,7 @@ export const Dashboard: React.FC = () => {
             <li>
               <button 
                 onClick={() => setActiveTab('galeri')}
-                style={{ width: '100%', textAlign: 'left', padding: '10px', backgroundColor: activeTab === 'galeri' ? '#e9ecef' : 'transparent', border: 'none', borderRadius: '4px', cursor: 'pointer', fontWeight: activeTab === 'galeri' ? 'bold' : 'normal' }}
+                className={`admin-sidebar-btn ${activeTab === 'galeri' ? 'active' : ''}`}
               >
                 Galeri Foto
               </button>
@@ -109,7 +109,7 @@ export const Dashboard: React.FC = () => {
             <li>
               <button 
                 onClick={() => setActiveTab('peta')}
-                style={{ width: '100%', textAlign: 'left', padding: '10px', backgroundColor: activeTab === 'peta' ? '#e9ecef' : 'transparent', border: 'none', borderRadius: '4px', cursor: 'pointer', fontWeight: activeTab === 'peta' ? 'bold' : 'normal' }}
+                className={`admin-sidebar-btn ${activeTab === 'peta' ? 'active' : ''}`}
               >
                 Titik Peta (Lokasi)
               </button>
@@ -117,7 +117,7 @@ export const Dashboard: React.FC = () => {
             <li>
               <button 
                 onClick={() => setActiveTab('pemerintahan')}
-                style={{ width: '100%', textAlign: 'left', padding: '10px', backgroundColor: activeTab === 'pemerintahan' ? '#e9ecef' : 'transparent', border: 'none', borderRadius: '4px', cursor: 'pointer', fontWeight: activeTab === 'pemerintahan' ? 'bold' : 'normal' }}
+                className={`admin-sidebar-btn ${activeTab === 'pemerintahan' ? 'active' : ''}`}
               >
                 Struktur Pemerintahan
               </button>
@@ -125,7 +125,7 @@ export const Dashboard: React.FC = () => {
             <li>
               <button 
                 onClick={() => setActiveTab('potensi')}
-                style={{ width: '100%', textAlign: 'left', padding: '10px', backgroundColor: activeTab === 'potensi' ? '#e9ecef' : 'transparent', border: 'none', borderRadius: '4px', cursor: 'pointer', fontWeight: activeTab === 'potensi' ? 'bold' : 'normal' }}
+                className={`admin-sidebar-btn ${activeTab === 'potensi' ? 'active' : ''}`}
               >
                 Potensi Desa
               </button>
@@ -424,7 +424,7 @@ const TabProfil: React.FC = () => {
       </div>
       
       <h3 style={{marginTop: 20}}>Data Demografi</h3>
-      <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px'}}>
+      <div className="admin-grid-2-col">
         <div className="form-group">
           <label>Jumlah Penduduk</label>
           <input type="number" name="demo_penduduk" value={data.demo_penduduk || 0} onChange={handleChange} />

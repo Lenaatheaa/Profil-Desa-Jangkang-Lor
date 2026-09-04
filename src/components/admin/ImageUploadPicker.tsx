@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Button } from '../Button';
 import { Camera, Image as ImageIcon, X } from 'lucide-react';
 
@@ -9,6 +9,8 @@ interface ImageUploadPickerProps {
 
 export const ImageUploadPicker: React.FC<ImageUploadPickerProps> = ({ onImageSelected, currentImageUrl }) => {
   const [preview, setPreview] = useState<string>(currentImageUrl || '');
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const cameraInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -22,6 +24,8 @@ export const ImageUploadPicker: React.FC<ImageUploadPickerProps> = ({ onImageSel
   const handleClear = () => {
     setPreview('');
     onImageSelected(null, '');
+    if (fileInputRef.current) fileInputRef.current.value = '';
+    if (cameraInputRef.current) cameraInputRef.current.value = '';
   };
 
   return (
@@ -39,30 +43,32 @@ export const ImageUploadPicker: React.FC<ImageUploadPickerProps> = ({ onImageSel
         </div>
       ) : (
         <div style={{ display: 'flex', gap: '10px', marginTop: '8px', flexWrap: 'wrap' }}>
-          <label style={{ cursor: 'pointer' }}>
-            <Button type="button" variant="outline" size="sm" style={{ pointerEvents: 'none' }}>
+          <div>
+            <Button type="button" variant="outline" size="sm" onClick={() => fileInputRef.current?.click()}>
               <ImageIcon size={16} className="mr-2" /> Pilih dari Galeri
             </Button>
             <input 
+              ref={fileInputRef}
               type="file" 
               accept="image/*" 
               onChange={handleFileChange} 
               style={{ display: 'none' }} 
             />
-          </label>
+          </div>
           
-          <label style={{ cursor: 'pointer' }}>
-            <Button type="button" variant="outline" size="sm" style={{ pointerEvents: 'none' }}>
+          <div>
+            <Button type="button" variant="outline" size="sm" onClick={() => cameraInputRef.current?.click()}>
               <Camera size={16} className="mr-2" /> Jepret Langsung
             </Button>
             <input 
+              ref={cameraInputRef}
               type="file" 
               accept="image/*" 
               capture="environment"
               onChange={handleFileChange} 
               style={{ display: 'none' }} 
             />
-          </label>
+          </div>
         </div>
       )}
     </div>
