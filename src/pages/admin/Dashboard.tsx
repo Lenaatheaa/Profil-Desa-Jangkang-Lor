@@ -223,7 +223,7 @@ const TabPeta: React.FC = () => {
     e.preventDefault();
     setIsSubmitting(true);
     try {
-      let finalFotoUrl = fotoUrl;
+      let finalFotoUrl = fotoUrl || null;
       if (fotoFile) {
         const fileExt = fotoFile.name.split('.').pop();
         const fileName = `${Math.random()}.${fileExt}`;
@@ -234,17 +234,33 @@ const TabPeta: React.FC = () => {
         finalFotoUrl = data.publicUrl;
       }
 
-      const payload = { nama, kategori: kategori.toLowerCase().trim(), deskripsi, lat, lng, foto_url: finalFotoUrl };
+      const safeLat = Number.isFinite(Number(lat)) ? Number(lat) : 0;
+      const safeLng = Number.isFinite(Number(lng)) ? Number(lng) : 0;
+      const payload = {
+        nama: nama.trim(),
+        kategori: kategori.toLowerCase().trim(),
+        deskripsi: deskripsi.trim(),
+        lat: safeLat,
+        lng: safeLng,
+        foto_url: finalFotoUrl,
+      };
+
+      if (!payload.nama || !payload.kategori || !Number.isFinite(payload.lat) || !Number.isFinite(payload.lng)) {
+        throw new Error('Koordinat dan data lokasi belum lengkap.');
+      }
+
       if (editingId) {
-        await supabase.from('lokasi').update(payload).eq('id', editingId);
+        const { error } = await supabase.from('lokasi').update(payload).eq('id', editingId);
+        if (error) throw error;
       } else {
-        await supabase.from('lokasi').insert([payload]);
+        const { error } = await supabase.from('lokasi').insert([payload]);
+        if (error) throw error;
       }
       setIsModalOpen(false);
       fetchLokasi();
     } catch (err) {
-      alert("Gagal menyimpan data.");
-      console.error(err);
+      console.error('Gagal menyimpan lokasi:', err);
+      alert(err instanceof Error ? err.message : 'Gagal menyimpan data lokasi.');
     } finally {
       setIsSubmitting(false);
     }
