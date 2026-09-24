@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { supabase, type LokasiSupabase } from '../../lib/supabase';
+import { supabase, uploadToBucket, type LokasiSupabase } from '../../lib/supabase';
 import { Button } from '../../components/Button';
 import { LogOut, Plus, Edit2, Trash2, MapPin, X, Save, Image as ImageIcon, Menu } from 'lucide-react';
 import { MapContainer, TileLayer, Marker, useMapEvents, useMap } from 'react-leaflet';
@@ -228,10 +228,7 @@ const TabPeta: React.FC = () => {
         const fileExt = fotoFile.name.split('.').pop();
         const fileName = `${Math.random()}.${fileExt}`;
         const filePath = `public/${fileName}`;
-        const { error: uploadError } = await supabase.storage.from('foto-lokasi').upload(filePath, fotoFile);
-        if (uploadError) throw uploadError;
-        const { data } = supabase.storage.from('foto-lokasi').getPublicUrl(filePath);
-        finalFotoUrl = data.publicUrl;
+        finalFotoUrl = await uploadToBucket('foto-lokasi', filePath, fotoFile);
       }
 
       const safeLat = Number.isFinite(Number(lat)) ? Number(lat) : 0;
@@ -399,11 +396,7 @@ const TabProfil: React.FC = () => {
       if (fotoFile) {
         const fileExt = fotoFile.name.split('.').pop();
         const fileName = `hero_${Math.random()}.${fileExt}`;
-        const { error: uploadError } = await supabase.storage.from('foto-web').upload(`public/${fileName}`, fotoFile);
-        if (!uploadError) {
-          const { data: urlData } = supabase.storage.from('foto-web').getPublicUrl(`public/${fileName}`);
-          finalFotoUrl = urlData.publicUrl;
-        }
+        finalFotoUrl = await uploadToBucket('foto-web', `public/${fileName}`, fotoFile);
       }
 
       await supabase.from('profil_umum').update({
@@ -508,11 +501,7 @@ const TabGaleri: React.FC = () => {
       if (fotoFile) {
         const fileExt = fotoFile.name.split('.').pop();
         const fileName = `galeri_${Math.random()}.${fileExt}`;
-        const { error: uploadError } = await supabase.storage.from('foto-web').upload(`public/${fileName}`, fotoFile);
-        if (!uploadError) {
-          const { data: urlData } = supabase.storage.from('foto-web').getPublicUrl(`public/${fileName}`);
-          finalFotoUrl = urlData.publicUrl;
-        }
+        finalFotoUrl = await uploadToBucket('foto-web', `public/${fileName}`, fotoFile);
       }
 
       await supabase.from('galeri').insert([{ url: finalFotoUrl, caption, kategori }]);
